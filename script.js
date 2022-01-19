@@ -1,12 +1,16 @@
 const loanSlider = document.querySelector(".loanSlider");
 const loan = document.querySelector(".loan");
-
 const timeSlider = document.querySelector(".timeSlider");
 const time = document.querySelector(".time");
-
 const monthCost = document.querySelector(".monthCost");
+const maxLoan = document.querySelector(".maxLoan");
+const maxTime = document.querySelector(".maxTime");
+const btn = document.querySelector(".btn");
+
 const yearlyInterestRate = 9.9;
-let loanSliderValue = loanSlider.value * 10000;
+
+let currentMonthLoan = loanSlider.value;
+let currentTime = timeSlider.value;
 
 const setMonthlyCost = (amount, year) => {
   const monthlyInterestRate = yearlyInterestRate / 100 / 12;
@@ -20,12 +24,14 @@ const setMonthlyCost = (amount, year) => {
 
 const initialPayment = () => {
   monthCost.innerHTML =
-    setMonthlyCost(loanSliderValue, timeSlider.value) + " SEK / månad";
+    setMonthlyCost(loanSlider.value, timeSlider.value) + " SEK / månad";
 };
 
 initialPayment();
 
-loanSlider.addEventListener("input", () => {
+const timeRange = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+loanSlider.addEventListener("input", (event) => {
   let percentage =
     ((loanSlider.value - loanSlider.min) / (loanSlider.max - loanSlider.min)) *
     100;
@@ -36,23 +42,12 @@ loanSlider.addEventListener("input", () => {
     percentage +
     "%, #ffffff 100%)";
 
-  loanSliderValue = loanSlider.value * 10000;
+  monthlyCostDisplayer(percentage);
 
-  if (loanSlider.value > 2) {
-    loan.style.display = "block";
-    let position = parseInt(loanSlider.value);
-    if (loanSlider.value > 5) {
-      loan.style.left = `${(position *= 2)}%`;
-    }
-    loan.style.left = `${position}%`;
-    loan.innerHTML =
-      loanSliderValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
-      " " +
-      "kr";
-  } else loan.style.display = "none";
-
-  monthCost.innerHTML =
-    setMonthlyCost(loanSliderValue, timeSlider.value) + " SEK / månad";
+  if (loanSlider.value === loanSlider.max) {
+    return (maxLoan.style.display = "none");
+  }
+  maxLoan.style.display = "block";
 });
 
 timeSlider.addEventListener("input", () => {
@@ -65,21 +60,54 @@ timeSlider.addEventListener("input", () => {
     "%, #ffffff " +
     percentage +
     "%, #ffffff 100%)";
-  let timeSliderValue = timeSlider.value;
 
-  if (timeSlider.value > 2) {
-    time.style.display = "block";
-    let position = parseInt(timeSlider.value);
-    if (timeSlider.value > 5) {
-      time.style.left = `${(position *= 4.2)}%`;
+  timeDisplayer(percentage);
+  if (timeSlider.value === timeSlider.max) {
+    return (maxTime.style.display = "none");
+  }
+});
+
+const timeDisplayer = (percentage) => {
+  let timeConverter = parseInt(timeSlider.value / 10);
+  if (timeRange.includes(parseFloat(timeConverter))) {
+    currentTime = timeConverter;
+    monthCost.innerHTML =
+      setMonthlyCost(currentMonthLoan, currentTime) + " SEK / månad";
+    if (percentage <= 0) {
+      time.style.display = "none";
+    } else {
+      time.style.display = "block";
+      time.style.left = `${percentage / 2}%`;
     }
-    time.style.left = `${position}%`;
-    time.innerHTML =
-      timeSliderValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
-      " " +
-      "år";
-  } else time.style.display = "none";
+    time.innerHTML = currentTime + " år ";
 
+    if (loanSlider.value === loanSlider.max) {
+      return (maxLoan.style.display = "none");
+    }
+  }
+};
+
+const monthlyCostDisplayer = (percentage) => {
+  if (percentage <= 0) {
+    loan.style.display = "none";
+  } else {
+    loan.style.display = "block";
+    loan.style.left = `${percentage / 2}%`;
+  }
+  currentMonthLoan = loanSlider.value;
   monthCost.innerHTML =
-    setMonthlyCost(loanSliderValue, timeSlider.value) + " SEK / månad";
+    setMonthlyCost(currentMonthLoan, currentTime) + " SEK / månad";
+  loan.innerHTML =
+    currentMonthLoan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
+    " " +
+    "kr";
+};
+
+btn.addEventListener("click", () => {
+  var url = new URL("http://test/loan-application/");
+
+  url.searchParams.append("amount", currentMonthLoan);
+  url.searchParams.append("months", currentTime * 12);
+
+  console.log(url.pathname + url.search);
 });

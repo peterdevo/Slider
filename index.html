@@ -9,21 +9,43 @@
   </head>
   <body>
     <div class="wrapper">
-      <div class="loanContainer">
-        <input type="range" min="2" max="20" class="loanSlider" value="2" />
-        <div class="maxLoan">200 000 kr</div>
-        <div class="loan"></div>
-        <div class="interestRate">
-          Exempel på månadskostnad <br />
-          <div class="monthCost"></div>
+      <h3>Lånekalkyl</h3>
+      <div class="container">
+        <span>Lånebelopp</span>
+        <div class="loanContainer">
+          <input
+            type="range"
+            min="20000"
+            max="200000"
+            class="loanSlider"
+            value="20000"
+            step="10000"
+          />
+          <div class="maxLoan">200 000 kr</div>
+          <div class="loan"></div>
+          <div class="interestRate">
+            Exempel på månadskostnad <br />
+            <div class="monthCost"></div>
+          </div>
         </div>
       </div>
 
-      <div class="timeContainer">
-        <input type="range" min="2" max="10" class="timeSlider" value="1" />
-        <div class="maxTime">10 år</div>
-        <div class="time"></div>
+      <div class="container">
+        <span>Lånetid</span>
+        <div class="timeContainer">
+          <input
+            type="range"
+            min="20"
+            max="100"
+            class="timeSlider"
+            value="20"
+            step="2"
+          />
+          <div class="maxTime">10 år</div>
+          <div class="time"></div>
+        </div>
       </div>
+      <button class="btn">Till ansökan</button>
     </div>
   </body>
 
