@@ -122,7 +122,6 @@ body {
 
 .loanSlider::-moz-range-thumb,
 .timeSlider::-moz-range-thumb {
-  pointer-events: none;
   cursor: pointer;
   -webkit-appearance: none;
   -moz-appearance: none;
