@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Slider</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="loanContainer">
+        <input type="range" min="2" max="20" class="loanSlider" value="2" />
+        <div class="maxLoan">200 000 kr</div>
+        <div class="loan"></div>
+        <div class="interestRate">
+          Exempel på månadskostnad <br />
+          <div class="monthCost"></div>
+        </div>
+      </div>
+
+      <div class="timeContainer">
+        <input type="range" min="2" max="10" class="timeSlider" value="1" />
+        <div class="maxTime">10 år</div>
+        <div class="time"></div>
+      </div>
+    </div>
+  </body>
+
+  <script src="./script.js"></script>
+</html>
