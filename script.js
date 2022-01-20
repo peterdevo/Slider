@@ -81,21 +81,23 @@ yearSlider.addEventListener("input", () => {
 
 const timeDisplayer = (percentage) => {
   let timeConverter = parseInt(yearSlider.value / 10);
+  yearBox.style.display = "block";
+
   if (timeRange.includes(parseFloat(timeConverter))) {
     currentYear = timeConverter;
     monthCost.innerHTML =
       setMonthlyCost(currentMonthLoan, currentYear) + " SEK / månad";
 
-    year.style.right = "-50px";
-    year.style.width = "100px";
+    year.style.right = "-9px";
+    year.style.width = "60px";
     yearBox.style.width = `${(percentage / 100) * 360}px`;
     year.innerHTML = currentYear + " år ";
-    
   }
 };
 
 const monthlyCostDisplayer = (percentage) => {
-  loan.style.right = "-18px";
+  loanBox.style.display = "block";
+  loan.style.right = "-15px";
   loan.style.width = "100px";
   loanBox.style.width = `${(percentage / 100) * 360}px`;
 
