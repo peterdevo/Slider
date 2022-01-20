@@ -2,19 +2,19 @@ const loanSlider = document.querySelector(".loanSlider");
 const loanBox = document.querySelector(".loanBox");
 const loan = document.querySelector(".loan");
 
-const timeSlider = document.querySelector(".timeSlider");
-const timeBox = document.querySelector(".timeBox");
-const time = document.querySelector(".time");
+const yearSlider = document.querySelector(".yearSlider");
+const yearBox = document.querySelector(".yearBox");
+const year = document.querySelector(".year");
 
 const monthCost = document.querySelector(".monthCost");
 const maxLoan = document.querySelector(".maxLoan");
-const maxTime = document.querySelector(".maxTime");
+const maxYear = document.querySelector(".maxYear");
 const btn = document.querySelector(".btn");
 
 const yearlyInterestRate = 9.9;
 
 let currentMonthLoan = loanSlider.value;
-let currentTime = timeSlider.value;
+let currentYear = yearSlider.value;
 
 const setMonthlyCost = (amount, year) => {
   const monthlyInterestRate = yearlyInterestRate / 100 / 12;
@@ -28,7 +28,7 @@ const setMonthlyCost = (amount, year) => {
 
 const initialPayment = () => {
   monthCost.innerHTML =
-    setMonthlyCost(loanSlider.value, timeSlider.value) + " SEK / månad";
+    setMonthlyCost(loanSlider.value, yearSlider.value) + " SEK / månad";
 };
 
 initialPayment();
@@ -57,11 +57,11 @@ loanSlider.addEventListener("input", (event) => {
   }
 });
 
-timeSlider.addEventListener("input", () => {
+yearSlider.addEventListener("input", () => {
   let percentage =
-    ((timeSlider.value - timeSlider.min) / (timeSlider.max - timeSlider.min)) *
+    ((yearSlider.value - yearSlider.min) / (yearSlider.max - yearSlider.min)) *
     100;
-  timeSlider.style.background =
+  yearSlider.style.background =
     "linear-gradient(to right, #512D6D, #512D6D " +
     percentage +
     "%, #ffffff " +
@@ -70,37 +70,38 @@ timeSlider.addEventListener("input", () => {
 
   timeDisplayer(percentage);
 
-  if (timeSlider.value === timeSlider.max) {
-    maxTime.style.display = "none";
-    timeSlider.style.borderRight = "none";
+  if (yearSlider.value === yearSlider.max) {
+    maxYear.style.display = "none";
+    yearSlider.style.borderRight = "none";
   } else {
-    timeSlider.style.borderRight = "1px solid rgb(94, 94, 94)";
+    maxYear.style.display = "block";
+    yearSlider.style.borderRight = "1px solid rgb(94, 94, 94)";
   }
 });
 
 const timeDisplayer = (percentage) => {
-  let timeConverter = parseInt(timeSlider.value / 10);
+  let timeConverter = parseInt(yearSlider.value / 10);
   if (timeRange.includes(parseFloat(timeConverter))) {
-    currentTime = timeConverter;
+    currentYear = timeConverter;
     monthCost.innerHTML =
-      setMonthlyCost(currentMonthLoan, currentTime) + " SEK / månad";
+      setMonthlyCost(currentMonthLoan, currentYear) + " SEK / månad";
 
-    time.style.right = "-50px";
-    time.style.width = "100px";
-    timeBox.style.width = `${(percentage / 100) * 360}px`;
-    time.innerHTML = currentTime + " år ";
+    year.style.right = "-50px";
+    year.style.width = "100px";
+    yearBox.style.width = `${(percentage / 100) * 360}px`;
+    year.innerHTML = currentYear + " år ";
     
   }
 };
 
 const monthlyCostDisplayer = (percentage) => {
-  loan.style.right = "-20px";
+  loan.style.right = "-18px";
   loan.style.width = "100px";
   loanBox.style.width = `${(percentage / 100) * 360}px`;
 
   currentMonthLoan = loanSlider.value;
   monthCost.innerHTML =
-    setMonthlyCost(currentMonthLoan, currentTime) + " SEK / månad";
+    setMonthlyCost(currentMonthLoan, currentYear) + " SEK / månad";
   loan.innerHTML =
     currentMonthLoan.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") +
     " " +
@@ -111,7 +112,7 @@ btn.addEventListener("click", () => {
   var url = new URL("http://test/loan-application/");
 
   url.searchParams.append("amount", currentMonthLoan);
-  url.searchParams.append("months", currentTime * 12);
+  url.searchParams.append("months", currentYear * 12);
 
   console.log(url.pathname + url.search);
 });
