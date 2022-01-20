@@ -35,7 +35,7 @@ initialPayment();
 
 const timeRange = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-loanSlider.addEventListener("input", (event) => {
+loanSlider.addEventListener("input", () => {
   let percentage =
     ((loanSlider.value - loanSlider.min) / (loanSlider.max - loanSlider.min)) *
     100;
