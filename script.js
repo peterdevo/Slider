@@ -1,7 +1,11 @@
 const loanSlider = document.querySelector(".loanSlider");
+const loanBox = document.querySelector(".loanBox");
 const loan = document.querySelector(".loan");
+
 const timeSlider = document.querySelector(".timeSlider");
+const timeBox = document.querySelector(".timeBox");
 const time = document.querySelector(".time");
+
 const monthCost = document.querySelector(".monthCost");
 const maxLoan = document.querySelector(".maxLoan");
 const maxTime = document.querySelector(".maxTime");
@@ -45,9 +49,12 @@ loanSlider.addEventListener("input", (event) => {
   monthlyCostDisplayer(percentage);
 
   if (loanSlider.value === loanSlider.max) {
-    return (maxLoan.style.display = "none");
+    maxLoan.style.display = "none";
+    loanSlider.style.borderRight = "none";
+  } else {
+    loanSlider.style.borderRight = "1px solid rgb(94, 94, 94)";
+    maxLoan.style.display = "block";
   }
-  maxLoan.style.display = "block";
 });
 
 timeSlider.addEventListener("input", () => {
@@ -62,8 +69,12 @@ timeSlider.addEventListener("input", () => {
     "%, #ffffff 100%)";
 
   timeDisplayer(percentage);
+
   if (timeSlider.value === timeSlider.max) {
-    return (maxTime.style.display = "none");
+    maxTime.style.display = "none";
+    timeSlider.style.borderRight = "none";
+  } else {
+    timeSlider.style.borderRight = "1px solid rgb(94, 94, 94)";
   }
 });
 
@@ -73,27 +84,20 @@ const timeDisplayer = (percentage) => {
     currentTime = timeConverter;
     monthCost.innerHTML =
       setMonthlyCost(currentMonthLoan, currentTime) + " SEK / månad";
-    if (percentage <= 0) {
-      time.style.display = "none";
-    } else {
-      time.style.display = "block";
-      time.style.left = `${percentage / 2}%`;
-    }
-    time.innerHTML = currentTime + " år ";
 
-    if (loanSlider.value === loanSlider.max) {
-      return (maxLoan.style.display = "none");
-    }
+    time.style.right = "-50px";
+    time.style.width = "100px";
+    timeBox.style.width = `${(percentage / 100) * 360}px`;
+    time.innerHTML = currentTime + " år ";
+    
   }
 };
 
 const monthlyCostDisplayer = (percentage) => {
-  if (percentage <= 0) {
-    loan.style.display = "none";
-  } else {
-    loan.style.display = "block";
-    loan.style.left = `${percentage / 2}%`;
-  }
+  loan.style.right = "-20px";
+  loan.style.width = "100px";
+  loanBox.style.width = `${(percentage / 100) * 360}px`;
+
   currentMonthLoan = loanSlider.value;
   monthCost.innerHTML =
     setMonthlyCost(currentMonthLoan, currentTime) + " SEK / månad";

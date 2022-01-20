@@ -6,7 +6,6 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  overflow: hidden;
   font-family:Arial, Helvetica, sans-serif;
 }
 .wrapper {
@@ -15,6 +14,9 @@ body {
   gap: 50px;
 }
 
+.wrapper h3{
+  font-weight: 750;
+}
 .container {
   width: 100%;
   color: rgb(92, 92, 92);
@@ -28,7 +30,8 @@ body {
 
 .loanContainer,
 .timeContainer {
-  width: 500px;
+  position: relative;
+  width: 400px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -38,18 +41,26 @@ body {
   margin: 20px 0px;
 }
 
-.loan,
-.time {
+.loanBox,
+.timeBox {
   position: absolute;
-  top: 12.5px;
+  top: 15px;
   color: #ffff;
   letter-spacing: 0.3px;
+  border-radius: 20px;
+  width: 95%;
+  height: 100%;
+}
+.loan,
+.time{
+  position: absolute;
+  font-size: 0.85em;
 }
 .maxLoan,
 .maxTime {
   position: absolute;
   right: 15px;
-  top: 15px;
+  top: 16px;
   color: rgb(175, 174, 174);
   font-size: 0.8em;
   z-index: 1;
@@ -83,9 +94,6 @@ body {
 }
 .monthCost{
   letter-spacing: 1px;
-}
-
-.monthCost {
   margin-top: 10px;
 }
 
@@ -102,6 +110,7 @@ body {
   margin: 0;
   border: 1px solid rgb(94, 94, 94);
   transition: 0.15s ease-in-out;
+  border-left: none;
 
 }
 
@@ -112,13 +121,16 @@ body {
   -moz-appearance: none;
   background-color: #512d6d;
   border: 2px solid #ffff;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   position: relative;
   z-index: 2;
+  outline: none;
+
   
 }
+
 
 .loanSlider::-moz-range-thumb,
 .timeSlider::-moz-range-thumb {
@@ -127,14 +139,17 @@ body {
   -moz-appearance: none;
   background-color: #512d6d;
   border: 3px solid #ffff;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   z-index: 2;
+  outline: none;
 }
 
+
+
 .btn{
-  width: 20%;
+  width: 110px;
   padding: 10px;
   align-self: flex-end;
   color: white;
