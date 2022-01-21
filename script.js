@@ -11,10 +11,15 @@ const maxLoan = document.querySelector(".maxLoan");
 const maxYear = document.querySelector(".maxYear");
 const btn = document.querySelector(".btn");
 
+const loanContainer = document.querySelector(".loanContainer");
+const compStyle = window.getComputedStyle(loanContainer);
+
+const loanContainerWidth = compStyle.width.slice(0, 3);
+
 const yearlyInterestRate = 9.9;
 
 let currentMonthLoan = loanSlider.value;
-let currentYear = yearSlider.value;
+let currentYear = parseInt(yearSlider.value);
 
 const setMonthlyCost = (amount, year) => {
   const monthlyInterestRate = yearlyInterestRate / 100 / 12;
@@ -26,14 +31,12 @@ const setMonthlyCost = (amount, year) => {
   return Math.round(monthlyAmount);
 };
 
-const initialPayment = () => {
+const getInitialPayment = () => {
   monthCost.innerHTML =
     setMonthlyCost(loanSlider.value, yearSlider.value) + " SEK / månad";
 };
 
-initialPayment();
-
-const timeRange = [2, 3, 4, 5, 6, 7, 8, 9, 10];
+getInitialPayment();
 
 loanSlider.addEventListener("input", () => {
   let percentage =
@@ -46,7 +49,7 @@ loanSlider.addEventListener("input", () => {
     percentage +
     "%, #ffffff 100%)";
 
-  monthlyCostDisplayer(percentage);
+  amountDurationDisplay(percentage);
 
   if (loanSlider.value === loanSlider.max) {
     maxLoan.style.display = "none";
@@ -68,7 +71,7 @@ yearSlider.addEventListener("input", () => {
     percentage +
     "%, #ffffff 100%)";
 
-  timeDisplayer(percentage);
+  yearDurationDisplay(percentage);
 
   if (yearSlider.value === yearSlider.max) {
     maxYear.style.display = "none";
@@ -79,29 +82,47 @@ yearSlider.addEventListener("input", () => {
   }
 });
 
-const timeDisplayer = (percentage) => {
-  let timeConverter = parseInt(yearSlider.value / 10);
+const yearDurationDisplay = (percentage) => {
+  currentYear = yearSlider.value;
+  let size = (percentage / 100) * (parseFloat(loanContainerWidth) - 30);
   yearBox.style.display = "block";
 
-  if (timeRange.includes(parseFloat(timeConverter))) {
-    currentYear = timeConverter;
-    monthCost.innerHTML =
-      setMonthlyCost(currentMonthLoan, currentYear) + " SEK / månad";
-
-    year.style.right = "-9px";
-    year.style.width = "60px";
-    yearBox.style.width = `${(percentage / 100) * 360}px`;
-    year.innerHTML = currentYear + " år ";
+  if (currentYear < 3) {
+    year.style.top = "35px";
+    year.style.backgroundColor = "#512d6d";
+    year.style.padding = "10px";
+    year.style.borderRadius = "6px";
+    yearBox.style.minWidth = "48px";
+  } else {
+    year.style.top = "0px";
+    year.style.right = `${size * 0.07}px`;
+    year.style.color = "#ffff";
+    year.style.padding = "0px";
+    yearBox.style.width = `${size}px`;
   }
+  monthCost.innerHTML =
+    setMonthlyCost(currentMonthLoan, currentYear) + " SEK / månad";
+  year.innerHTML = currentYear + " år ";
 };
 
-const monthlyCostDisplayer = (percentage) => {
-  loanBox.style.display = "block";
-  loan.style.right = "-15px";
-  loan.style.width = "100px";
-  loanBox.style.width = `${(percentage / 100) * 360}px`;
-
+const amountDurationDisplay = (percentage) => {
   currentMonthLoan = loanSlider.value;
+  let size = (percentage / 100) * (parseFloat(loanContainerWidth) - 30);
+  loanBox.style.display = "block";
+  if (currentMonthLoan < 60000) {
+    loan.style.top = "35px";
+    loan.style.backgroundColor = "#512d6d";
+    loan.style.padding = "10px";
+    loan.style.borderRadius = "6px";
+  } else {
+    loan.style.top = "0px";
+    loan.style.padding = "0px";
+    loan.style.color = "#ffff";
+    loan.style.right = `${size * 0.07}px`;
+    loan.style.minWidth = "60px";
+    loanBox.style.width = `${size}px`;
+  }
+
   monthCost.innerHTML =
     setMonthlyCost(currentMonthLoan, currentYear) + " SEK / månad";
   loan.innerHTML =

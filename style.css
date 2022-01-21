@@ -6,7 +6,7 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
-  font-family:Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .wrapper {
   display: flex;
@@ -14,13 +14,12 @@ body {
   gap: 50px;
 }
 
-.wrapper h3{
+.wrapper h3 {
   font-weight: 750;
 }
 .container {
   width: 100%;
   color: rgb(92, 92, 92);
-
 }
 .container span {
   margin: 0px 10px;
@@ -36,7 +35,6 @@ body {
   flex-direction: column;
   position: relative;
   padding: 10px;
-  
 }
 .container label {
   margin: 20px 0px;
@@ -50,14 +48,27 @@ body {
   letter-spacing: 0.3px;
   border-radius: 20px;
   width: 95%;
-  height: 100%;
+  height: 1px;
   z-index: 2;
-  display: none;
 }
-.loan,
-.year{
+
+.year,
+.loan {
   position: absolute;
   font-size: 0.85em;
+  top: 35px;
+  color: #ffff;
+  background-color: #512d6d;
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.extension {
+  position: absolute;
+  font-size: 0.85em;
+  top: 35px;
+  background-color: #512d6d;
+  border-radius: 6px;
 }
 .maxLoan,
 .maxYear {
@@ -95,7 +106,7 @@ body {
   border-bottom: 10px solid transparent;
   transform: rotate(-59deg);
 }
-.monthCost{
+.monthCost {
   letter-spacing: 1px;
   margin-top: 10px;
 }
@@ -114,7 +125,6 @@ body {
   border: 1px solid rgb(94, 94, 94);
   transition: 0.15s ease-in-out;
   border-left: none;
-
 }
 
 .loanSlider::-webkit-slider-thumb,
@@ -128,12 +138,9 @@ body {
   height: 48px;
   border-radius: 50%;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   outline: none;
-
-  
 }
-
 
 .loanSlider::-moz-range-thumb,
 .yearSlider::-moz-range-thumb {
@@ -145,21 +152,19 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  z-index: 3;
+  z-index: 5;
   outline: none;
 }
 
-
-
-.btn{
+.btn {
   width: 110px;
   padding: 10px;
   align-self: flex-end;
   color: white;
   border: none;
   outline: none;
-  background-color: #2FDD92;
-  font-weight:bold;
+  background-color: #2fdd92;
+  font-weight: bold;
   border-radius: 3px;
   cursor: pointer;
 }

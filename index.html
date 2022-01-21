@@ -13,16 +13,18 @@
       <div class="container">
         <span>Lånebelopp</span>
         <div class="loanContainer">
-          <input
-            type="range"
-            min="20000"
-            max="200000"
-            class="loanSlider"
-            value="20000"
-            step="10000"
-          />
+          <div>
+            <input
+              type="range"
+              min="20000"
+              max="200000"
+              class="loanSlider"
+              value="20000"
+              step="10000"
+            />
+          </div>
           <div class="maxLoan">200 000 kr</div>
-          <div class="loanBox"><div class="loan"></div></div>
+          <div class="loanBox"><div class="loan">20 000 kr</div></div>
           <div class="monthCostBox">
             Exempel på månadskostnad <br />
             <div class="monthCost"></div>
@@ -35,14 +37,14 @@
         <div class="timeContainer">
           <input
             type="range"
-            min="20"
-            max="100"
+            min="2"
+            max="10"
             class="yearSlider"
-            value="20"
-            step="2"
+            value="2"
+            step="1"
           />
           <div class="maxYear">10 år</div>
-          <div class="yearBox"><div class="year"></div></div>
+          <div class="yearBox"><div class="year">2 år</div></div>
         </div>
       </div>
       <button class="btn">Till ansökan</button>
