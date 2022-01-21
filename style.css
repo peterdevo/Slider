@@ -62,14 +62,6 @@ body {
   padding: 10px;
   border-radius: 6px;
 }
-
-.extension {
-  position: absolute;
-  font-size: 0.85em;
-  top: 35px;
-  background-color: #512d6d;
-  border-radius: 6px;
-}
 .maxLoan,
 .maxYear {
   position: absolute;
